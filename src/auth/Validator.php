@@ -22,7 +22,7 @@ class Validator {
 
 
 	public static function validateUser($args) {
-		$data = DB::table('users')->where($args)->limit(1)->value('active');
+		$data = DB::table(API_USER_TABLE)->where($args)->limit(1)->value('active');
 		if ($data == "yes") {
 			return true;
 		} else {

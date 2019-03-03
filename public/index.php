@@ -9,6 +9,7 @@ loadEnv();
 loadDb();
 
 # Pre define vars
+define('API_USER_TABLE', getenv('USER_TABLE'));
 define('KEY_ALG', getenv('JWT_ALG'));
 define('APP_KEY', getenv('APP_KEY'));
 define('SETTINGS_SLIM', ['settings' => [
