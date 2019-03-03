@@ -8,14 +8,16 @@ use Illuminate\Container\Container;
 
 class Database {
 
+	private $database;
+
 	public function __construct(array $config, $conection = 'default')
 	{
-	    $db = new Manager;
-	    $db->addConnection($config, $conection);
-	    $db->addConnection($config, $conection);
+	    $this->database = new Manager;
+	    $this->database->addConnection($config, $conection);
+	    $this->database->addConnection($config, $conection);
 
-	    $db->setEventDispatcher(new Dispatcher(new Container));
-	    $db->setAsGlobal();
-	    $db->bootEloquent();
+	    $this->database->setEventDispatcher(new Dispatcher(new Container));
+	    $this->database->setAsGlobal();
+	    $this->database->bootEloquent();
 	}
 }

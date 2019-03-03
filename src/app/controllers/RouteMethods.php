@@ -22,20 +22,19 @@ class RouteMethods {
 	}
 
 	public function getToken($request, $response, $args) {
-		
 		if (count($args) <= 1) {
-			exit;
+			return $response->withJson(errorMessages(5));
 		}
 
+		# JWT Prerequired data
 		$args['iat'] = time();
 		$args['iss'] = 'localhost';
 		$args['exp'] = time() + (60);
 		
-		$key = getKey();
-		$jwt_token = JWT::encode($args, $key);
+		$jwt_token = JWT::encode($args, APP_KEY);
 
 		return $response->withJson([
-			'response' => ['token' => $jwt_token ]
+			'response' => ['token' => $jwt_token]
 		]);
 	}
 }
