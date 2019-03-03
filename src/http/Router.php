@@ -12,6 +12,7 @@ $skip_path = [
 
 foreach ($routes as $path => $route) {
 	try {
+		
 		$app->{$route['method']}($path, function (Request $request, Response $response, $args) use ($route, $path, $skip_path) {		
 
 			# Checking and validation
@@ -40,6 +41,7 @@ foreach ($routes as $path => $route) {
 			
 			return $class->{$method}($request, $response, $args);
 		});
+
 	} catch (ErrException $e) {
 		die("Caugth Exception: " . $e->getMessage());
 	}
