@@ -35,6 +35,11 @@ function errorMessages($code) {
 	];
 
 	if ($errors[$code]) {
-		return ['error' => [$code => $errors[$code]]];
+		return [
+			'error' => [
+				'code' => $code,
+				'message' => $errors[$code]
+			]
+		];
 	}
 }

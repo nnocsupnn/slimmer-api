@@ -29,4 +29,27 @@ class Validator {
 			return false;
 		}
 	}
+
+	public static function generateToken($request, $response, $args) {
+		if (count($args) <= 1) {
+			return $response->withJson(errorMessages(5));
+		}
+
+		$minutes = (60 * 5);
+
+		# JWT Prerequired data
+		$args['iat'] = time();
+		$args['iss'] = 'localhost';
+		$args['exp'] = time() + (60 * 5);
+		
+		$jwt_token = JWT::encode($args, APP_KEY);
+
+		$duration = $minutes / 60;
+		return $response->withJson([
+			'response' => [
+				'duration' => "{$duration} minute(s)",
+				'token' => $jwt_token
+			]
+		]);
+	}
 }

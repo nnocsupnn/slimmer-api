@@ -7,7 +7,6 @@
 */
 
 return [
-
 	'/' => [
 		'class' => 'App\Controllers\RouteMethods@default',
 		'method' => 'get'
@@ -18,7 +17,7 @@ return [
 		'method' => 'get'
 	],
 
-	'/get_token/{username}/{password}' => [
+	'/request_token/{username}/{password}' => [
 		'class' => 'App\Controllers\RouteMethods@getToken',
 		'method' => 'get'
 	]
