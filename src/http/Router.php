@@ -15,17 +15,17 @@ foreach ($routes as $path => $route) {
 		# Map routes
 		$app->{$route['method']}($path, function (Request $request, Response $response, $args) use ($route, $path, $skip_path) {		
 			# Checking and validation
-			if ($route['skip'] == true) {
+			if ($route['skip'] == false) {
 				# requesting token using username and password
 				@$post_data = $request->getParsedBody();
 				$auth = Auth::validateUser($post_data);
-				if (!$auth) return $response->withJson(errorMessages(03));
+				if (!$auth) return $response->withJson(errorMessages(3));
 				
 			} else {
 				# if token is available in the bearer
 				$header_token = @$request->getHeaders()['HTTP_AUTHORIZATION'];
 				if (empty($header_token)) {
-					return $response->withJson(errorMessages(02)); 
+					return $response->withJson(errorMessages(2)); 
 				}
 
 				$token = explode(" ", end($header_token))[1];

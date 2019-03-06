@@ -30,9 +30,9 @@ function loadDb() {
 
 function errorMessages($code) {
 	$errors = [
-		01 => 'Token expired.',
-		02 => 'Invalid token.',
-		03 => 'Authentication failed.',
+		1 => 'Token expired.',
+		2 => 'Invalid token.',
+		3 => 'Authentication failed.',
 		5 => 'Too few arguments.'
 	];
 

@@ -11,18 +11,18 @@ return [
 	'/' => [
 		'class' => 'App\Controllers\RouteMethods@default',
 		'method' => 'get',
-		'skip' => false
+		'skip' => true
 	],
 
 	'/sample' => [
 		'class' => 'App\Controllers\RouteMethods@index',
 		'method' => 'get',
-		'skip' => false
+		'skip' => true
 	],
 
 	'/request_token' => [
 		'class' => 'App\Controllers\RouteMethods@getToken',
 		'method' => 'post',
-		'skip' => true
+		'skip' => false
 	]
 ];
