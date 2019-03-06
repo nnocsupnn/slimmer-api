@@ -45,3 +45,9 @@ function errorMessages($code) {
 		];
 	}
 }
+
+function debug(array $var) {
+	echo "<pre>";
+	print_r($var);
+	exit;
+}

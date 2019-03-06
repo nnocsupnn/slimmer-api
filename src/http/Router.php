@@ -12,26 +12,30 @@ $skip_path = [
 
 foreach ($routes as $path => $route) {
 	try {
+		# Map routes
 		$app->{$route['method']}($path, function (Request $request, Response $response, $args) use ($route, $path, $skip_path) {		
-			
 			# Checking and validation
-			if (in_array($path, $skip_path)) {
+			if ($route['skip'] == true) {
 				# requesting token using username and password
-				$auth = Auth::validateUser($args);
+				@$post_data = $request->getParsedBody();
+				$auth = Auth::validateUser($post_data);
 				if (!$auth) return $response->withJson(errorMessages(03));
 				
 			} else {
 				# if token is available in the bearer
 				$header_token = @$request->getHeaders()['HTTP_AUTHORIZATION'];
-				if (empty($header_token)) return $response->withJson(errorMessages(02)); 
+				if (empty($header_token)) {
+					return $response->withJson(errorMessages(02)); 
+				}
 
 				$token = explode(" ", end($header_token))[1];
 				$isValidated = Auth::validateToken($token);
-
-				if (is_string($isValidated)) return $response->withJson(['error' => [
-					'code' => 0,
-					'message' => $isValidated
-				]]); 
+				if (is_string($isValidated)) {
+					return $response->withJson(['error' => [
+							'code' => 0,
+							'message' => $isValidated
+						]]); 
+				}
 			}
 			# End validation and checking
 
@@ -41,6 +45,7 @@ foreach ($routes as $path => $route) {
 			$class = new $instance[0]($request); // Class
 
 			if (!method_exists($class, $method)) throw new ErrException("Method $method is not exists on routes", 1);
+			if (count($args) <= 0) $args = @$post_data;
 			
 			return $class->{$method}($request, $response, $args);
 		});
