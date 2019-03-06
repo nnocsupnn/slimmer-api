@@ -14,7 +14,6 @@ class Database {
 	{
 	    $this->database = new Manager;
 	    $this->database->addConnection($config, $conection);
-	    $this->database->addConnection($config, $conection);
 
 	    $this->database->setEventDispatcher(new Dispatcher(new Container));
 	    $this->database->setAsGlobal();

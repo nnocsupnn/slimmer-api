@@ -20,7 +20,7 @@ define('SETTINGS_SLIM', ['settings' => [
 $app = new \Slim\App(SETTINGS_SLIM);
 
 # Head - Router
-$routes = require '../src/http/routes.php';
+$routes = require '../src/config/routes.php';
 require  '../src/http/Router.php';
 # End - Router
 

@@ -4,10 +4,12 @@
 * @global All global functions here
 */
 use Psr\Http\Message\ResponseInterface as Response;
+use Symfony\Component\Dotenv\Dotenv;
+
 
 function loadEnv() {
 	$env = '../.env';
-	if (file_exists($env)) (new Symfony\Component\Dotenv\Dotenv)->load($env);
+	if (file_exists($env)) (new Dotenv)->load($env);
 }
 
 function loadDb() {
