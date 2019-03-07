@@ -9,11 +9,17 @@ use Illuminate\Container\Container;
 class Database {
 
 	private $database;
+	private $config;
 
 	public function __construct(array $config, $conection = 'default')
 	{
-	    $this->database = new Manager;
-	    $this->database->addConnection($config, $conection);
+		$this->config['config'] = $config;
+		$this->config['connection'] = $conection;
+	    $this->database = new Manager;   
+	}
+
+	public function load() {
+		$this->database->addConnection($this->config['config'], $this->config['connection']);
 
 	    $this->database->setEventDispatcher(new Dispatcher(new Container));
 	    $this->database->setAsGlobal();

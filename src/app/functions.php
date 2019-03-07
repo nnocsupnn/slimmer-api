@@ -24,7 +24,7 @@ function loadDb() {
 		'prefix'    => getenv("DB_PREFIX")
 	];
 
-	(new \App\Database($config));
+	(new \App\Database($config))->load();
 }
 
 
