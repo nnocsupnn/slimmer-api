@@ -4,10 +4,10 @@
 * @return $routes 
 * Define all your routes here.
 * @var Class @ method
-* @var skip is for special routes
+* @var skip  false is for special routes
 */
 
-return [
+$routes = [
 	'/' => [
 		'class' => 'App\Controllers\RouteMethods@default',
 		'method' => 'get',
@@ -20,7 +20,7 @@ return [
 		'skip' => true
 	],
 
-	'/request_token' => [
+	URI_TOKEN => [
 		'class' => 'App\Controllers\RouteMethods@getToken',
 		'method' => 'post',
 		'skip' => false

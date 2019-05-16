@@ -12,6 +12,8 @@ loadDb();
 define('API_USER_TABLE', getenv('USER_TABLE'));
 define('KEY_ALG', getenv('JWT_ALG'));
 define('APP_KEY', getenv('APP_KEY'));
+define('MINUTE', getenv('MIN'));
+define('URI_TOKEN', getenv('REQUEST_TOKEN_URI'));
 define('SETTINGS_SLIM', ['settings' => [
 	'displayErrorDetails' => getenv('ERROR_DETAILS')
 ]]);
@@ -20,8 +22,8 @@ define('SETTINGS_SLIM', ['settings' => [
 $app = new \Slim\App(SETTINGS_SLIM);
 
 # Head - Router
-$routes = require '../src/config/routes.php';
-require  '../src/http/Router.php';
+require '../src/config/routes.php';
+(new \App\Router($routes, $app));
 # End - Router
 
 # Run

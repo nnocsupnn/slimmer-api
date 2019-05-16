@@ -14,9 +14,9 @@ class Validator {
 	public static function validateToken($token) {
 		try {
 			$validated = JWT::decode(trim($token), APP_KEY, [KEY_ALG]);
-			return true;
+			return ['validated' => true, 'message' => $validated];
 		} catch (\UnexpectedValueException $e) {
-			return $e->getMessage();
+			return ['validated' => false, 'message' => $e->getMessage()];
 		}
 	}
 
@@ -36,7 +36,7 @@ class Validator {
 			return $response->withJson(errorMessages(5));
 		}
 
-		$minutes = (60 * 5);
+		$minutes = (60 * MINUTE);
 
 		# JWT Prerequired data
 		$args['iat'] = time();
@@ -49,6 +49,7 @@ class Validator {
 		return $response->withJson([
 			'response' => [
 				'duration' => "{$duration} minute(s)",
+				'expiration' => date('F d, Y H:i:s a', (time() + $minutes)),
 				'token' => $jwt_token
 			]
 		]);
