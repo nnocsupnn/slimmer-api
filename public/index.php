@@ -23,7 +23,7 @@ $app = new \Slim\App(SETTINGS_SLIM);
 
 # Head - Router
 require '../src/config/routes.php';
-(new \App\Router($routes, $app));
+(new \App\Router($routes))->load($app);
 # End - Router
 
 # Run

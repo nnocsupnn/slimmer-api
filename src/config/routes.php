@@ -9,19 +9,19 @@
 
 $routes = [
 	'/' => [
-		'class' => 'App\Controllers\RouteMethods@default',
+		'class' => 'App\Controllers\Controllers@default',
 		'method' => 'get',
 		'skip' => true
 	],
 
 	'/sample' => [
-		'class' => 'App\Controllers\RouteMethods@index',
+		'class' => 'App\Controllers\Controllers@index',
 		'method' => 'get',
 		'skip' => true
 	],
 
 	URI_TOKEN => [
-		'class' => 'App\Controllers\RouteMethods@getToken',
+		'class' => 'App\Controllers\Controllers@getToken',
 		'method' => 'post',
 		'skip' => false
 	]

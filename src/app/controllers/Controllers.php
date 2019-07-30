@@ -7,10 +7,11 @@ error_reporting(E_ALL);
 
 use App\Auth\JWT;
 use App\Auth\Validator;
+use App\HTTP;
 
-class RouteMethods {
+class Controllers extends HTTP {
 
-	public function default($request, $response, $args) {
+	public function default($request, $response, $args):object {
 		return $response->withJson([
 			'data' => [
 				'name' => 'onin', 
@@ -30,7 +31,7 @@ class RouteMethods {
 					]
 				]
 			]
-		]);
+					], HTTP::HTTP_OK);
 	}
 
 	public function index($request, $response, $args) {

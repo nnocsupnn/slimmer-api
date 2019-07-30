@@ -28,7 +28,7 @@ function loadDb() {
 }
 
 
-function errorMessages($code) {
+function error($code) {
 	$errors = [
 		1 => 'Token expired.',
 		2 => 'Invalid token.',

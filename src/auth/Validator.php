@@ -3,15 +3,16 @@
 namespace App\Auth;
 
 use App\Auth\JWT;
+use App\Interfaces\ValidatorInterface;
 
 use Illuminate\Database\Capsule\Manager as DB;
-
+use App\HTTP;
 /**
 * All validating functions for the user
 */
-class Validator {
+class Validator implements ValidatorInterface {
 
-	public static function validateToken($token) {
+	public static function validateToken($token = '') {
 		try {
 			$validated = JWT::decode(trim($token), APP_KEY, [KEY_ALG]);
 			return ['validated' => true, 'message' => $validated];
@@ -21,7 +22,7 @@ class Validator {
 	}
 
 
-	public static function validateUser($args) {
+	public static function validateUser($args = []) {
 		$data = DB::table(API_USER_TABLE)->where($args)->limit(1)->value('active');
 		
 		if ($data == "yes") {
@@ -31,11 +32,11 @@ class Validator {
 		}
 	}
 
-	public static function generateToken($request, $response, $args) {
+	public static function generateToken($request, $response, $args = []) {
 		if (count($args) <= 1) {
-			return $response->withJson(errorMessages(5));
+			return $response->withJson(error(5));
 		}
-
+		
 		$minutes = (60 * MINUTE);
 
 		# JWT Prerequired data
@@ -52,6 +53,6 @@ class Validator {
 				'expiration' => date('F d, Y H:i:s a', (time() + $minutes)),
 				'token' => $jwt_token
 			]
-		]);
+		],  HTTP::HTTP_OK);
 	}
 }
